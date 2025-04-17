@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hoffpaulo.workshopmongo.domain.User;
+import com.hoffpaulo.workshopmongo.dto.UserDTO;
 import com.hoffpaulo.workshopmongo.services.UserService;
 
 @RestController
@@ -19,7 +20,7 @@ public class UserResource {
 	private UserService service;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
+	public ResponseEntity<List<UserDTO>> findAll(){
 		return ResponseEntity.ok(service.findAll());
 	}
 }
