@@ -1,13 +1,14 @@
 package com.hoffpaulo.workshopmongo.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hoffpaulo.workshopmongo.dto.UserDTO;
+import com.hoffpaulo.workshopmongo.domain.User;
 import com.hoffpaulo.workshopmongo.repositories.UserRepository;
+import com.hoffpaulo.workshopmongo.services.exception.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -15,7 +16,17 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 	
-	public List<UserDTO> findAll(){
-		return repository.findAll().stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+	public List<User> findAll(){
+		return repository.findAll();
+	}
+	
+	public User findById(String id) {
+		try {
+			User user = repository.findById(id).get();
+			return user;
+		}
+		catch(NoSuchElementException e) {
+			throw new ObjectNotFoundException("Object not found");
+		}
 	}
 }
