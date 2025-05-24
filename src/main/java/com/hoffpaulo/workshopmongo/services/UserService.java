@@ -26,8 +26,7 @@ public class UserService {
 	@Transactional
 	public User findById(String id) {
 		try {
-			User user = repository.findById(id).get();
-			return user;
+			return repository.findById(id).get();
 		}
 		catch(NoSuchElementException e) {
 			throw new ObjectNotFoundException("Object not found");
