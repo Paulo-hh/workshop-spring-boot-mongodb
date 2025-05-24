@@ -29,7 +29,7 @@ public class PostService {
 	
 	@Transactional
 	public List<Post> findByTitle(String text){
-		return repository.findByTitleContainingIgnoreCase(text);
+		return repository.searchTitle(text);
 	}
 	
 }
